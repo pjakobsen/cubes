@@ -10,6 +10,7 @@ import collections
 from cubes.errors import *
 from cubes.computation import *
 from cubes.backends.sql import extensions
+from cubes.compat import *
 
 try:
     import sqlalchemy
@@ -932,7 +933,8 @@ class QueryContext(object):
         # or as some column from joined table. Here we get the list of already
         # selected columns and derived aggregates
 
-        selection = collections.OrderedDict()
+        #selection = collections.OrderedDict()
+	selection = OrderedDict()
 
         # Get logical attributes from column labels (see logical_labels method
         # description for more information why this step is necessary)
@@ -954,7 +956,8 @@ class QueryContext(object):
                     if level.order:
                         order.append( (level.order_attribute.ref(), level.order) )
 
-        order_by = collections.OrderedDict()
+        #order_by = collections.OrderedDict()
+	order_by = OrderedDict()
 
         for item in order:
             if isinstance(item, basestring):
