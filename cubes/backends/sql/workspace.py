@@ -138,7 +138,7 @@ def create_workspace(model, **options):
             urlparse.uses_netloc.append("postgres")
             db_url = urlparse.urlparse(os.environ["HEROKU_POSTGRESQL_JADE_URL"])
         
-        sys.stderr.write("FINAL >> " + db_url + "\n")
+        sys.stderr.write("FINAL >> " + str(db_url) + "\n")
         
         engine = sqlalchemy.create_engine(db_url, **sa_options)
 
