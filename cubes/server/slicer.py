@@ -207,7 +207,7 @@ def run_server(config):
     if config.has_option("server", "port"):
         port = config.getint("server", "port")
     elif "PORT" in os.environ:
-        port = os.environ["PORT"]       
+        port = int(os.environ["PORT"])       
     else:
         port = 4000
     
