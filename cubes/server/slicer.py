@@ -209,7 +209,11 @@ def run_server(config):
     else if "PORT" in os.environ:
         port = os.environ["PORT"]       
     else:
-        port = 5000
+        port = 4000
+    
+    print "--------------  PORT ----------------"
+    print port
+    
 
     if config.has_option("server", "reload"):
         use_reloader = config.getboolean("server", "reload")
