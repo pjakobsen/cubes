@@ -212,6 +212,8 @@ def run_server(config):
         port = 4000
     
     print "--------------  PORT ----------------"
+    print os.environ
+    print os.environ["PORT"]  
     print port
     
 
