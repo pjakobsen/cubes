@@ -10,7 +10,6 @@ import collections
 from cubes.errors import *
 from cubes.computation import *
 from cubes.backends.sql import extensions
-from cubes.compat import *
 
 try:
     import sqlalchemy

@@ -2,7 +2,7 @@
 """Logical to Physical Mappers"""
 
 import collections
-import compat
+#import compat
 
 from cubes.common import get_logger
 from cubes.errors import *
@@ -135,8 +135,8 @@ class Mapper(object):
         This method should be used after each cube or mappings change.
         """
 
-        #self.attributes = collections.OrderedDict()
-	self.attributes = compat.OrderedDict()
+        self.attributes = collections.OrderedDict()
+	    #self.attributes = compat.OrderedDict()
 
         for attr in self.cube.measures:
             self.attributes[self.logical(attr)] = attr
