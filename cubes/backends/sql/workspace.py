@@ -6,6 +6,9 @@ from cubes.errors import *
 from cubes.browser import *
 from cubes.computation import *
 from cubes.workspace import Workspace
+import sys
+import os
+import urlparse
 
 from .utils import CreateTableAsSelect, InsertIntoAsSelect
 
@@ -74,6 +77,7 @@ def ddl_for_model(url, model, fact_prefix=None, dimension_prefix=None, schema_ty
     raise NotImplementedError
 
 def create_workspace(model, **options):
+    sys.stderr.write("--------------  DB URL ----------------\n")
     """Create workspace for `model` with configuration in dictionary
     `options`. This method is used by the slicer server.
 
@@ -128,7 +132,13 @@ def create_workspace(model, **options):
 
         sa_options = coalesce_options(sa_options, SQLALCHEMY_OPTION_TYPES)
         sa_options = {}
-
+        if "DATABASE_URL" in os.environ:
+            sys.stderr.write("--------------  DB URL ----------------\n")
+            urlparse.uses_netloc.append("postgres")
+            db_url = urlparse.urlparse(os.environ["DATABASE_URL"])
+        
+        sys.stderr.write(">> " + db_url + "\n")
+        
         engine = sqlalchemy.create_engine(db_url, **sa_options)
 
     options = coalesce_options(options, OPTION_TYPES)
