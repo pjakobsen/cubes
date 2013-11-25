@@ -1,5 +1,6 @@
 # -*- coding=utf -*-
 # Package imports
+import os
 import json
 import cubes
 import logging
@@ -205,6 +206,8 @@ def run_server(config):
 
     if config.has_option("server", "port"):
         port = config.getint("server", "port")
+    else if "PORT" in os.environ:
+        port = os.environ["PORT"]       
     else:
         port = 5000
 
