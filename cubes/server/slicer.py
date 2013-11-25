@@ -1,6 +1,7 @@
 # -*- coding=utf -*-
 # Package imports
 import os
+import sys
 import json
 import cubes
 import logging
@@ -207,13 +208,13 @@ def run_server(config):
     if config.has_option("server", "port"):
         port = config.getint("server", "port")
     elif "PORT" in os.environ:
-        sys.stdout.write("--------------  PORT ----------------")
         sys.stdout.write(os.environ["PORT"]) 
         port = int(os.environ["PORT"])     
-        sys.stdout.write(port)  
+ 
     else:
         port = 4000
-    sys.stdout.write(port)
+    sys.stdout.write("--------------  PORT ----------------\n")
+    sys.stdout.write(str(port))
 
     if config.has_option("server", "reload"):
         use_reloader = config.getboolean("server", "reload")
