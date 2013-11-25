@@ -133,7 +133,7 @@ def create_workspace(model, **options):
 
         sa_options = coalesce_options(sa_options, SQLALCHEMY_OPTION_TYPES)
         sa_options = {}
-        if "DATABASE_URL" in os.environ:
+        if "HEROKU_POSTGRESQL_JADE_URL" in os.environ:
             sys.stderr.write("--------------  DATABASE_URL ----------------\n")
             urlparse.uses_netloc.append("postgres")
             db_url = urlparse.urlparse(os.environ["HEROKU_POSTGRESQL_JADE_URL"])
