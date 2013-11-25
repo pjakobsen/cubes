@@ -199,6 +199,7 @@ def create_server(config_file):
     return Slicer(config)
 
 def run_server(config):
+    sys.stderr.write("--------------  STDERR ----------------\n")
     """Run OLAP server with configuration specified in `config`"""
     if config.has_option("server", "host"):
         host = config.get("server", "host")
@@ -208,14 +209,14 @@ def run_server(config):
     if config.has_option("server", "port"):
         port = config.getint("server", "port")
     elif "PORT" in os.environ:
-        sys.stdout.write(os.environ["PORT"]) 
+        sys.stderr.write(">> "+os.environ["PORT"]) 
         port = int(os.environ["PORT"])     
  
     else:
         port = 4000
-    sys.stdout.write("--------------  PORT ----------------\n")
-    sys.stdout.write(str(port))
-
+    sys.stderr.write("\n--------------  PORT ----------------\n")
+    sys.stderr.write(">> "+ str(port) + "\n")
+    
     if config.has_option("server", "reload"):
         use_reloader = config.getboolean("server", "reload")
     else:
