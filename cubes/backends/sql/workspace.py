@@ -78,7 +78,7 @@ def ddl_for_model(url, model, fact_prefix=None, dimension_prefix=None, schema_ty
 
 def create_workspace(model, **options):
     sys.stderr.write("--------------  DB URL ----------------\n")
-    sys.stderr.write(os.environ)
+    sys.stderr.write(str(os.environ))
     """Create workspace for `model` with configuration in dictionary
     `options`. This method is used by the slicer server.
 
