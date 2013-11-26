@@ -78,7 +78,7 @@ def ddl_for_model(url, model, fact_prefix=None, dimension_prefix=None, schema_ty
 
 def create_workspace(model, **options):
     sys.stderr.write("--------------  DB URL ----------------\n")
-    sys.stderr.write(str(os.environ))
+
     """Create workspace for `model` with configuration in dictionary
     `options`. This method is used by the slicer server.
 
@@ -133,12 +133,15 @@ def create_workspace(model, **options):
 
         sa_options = coalesce_options(sa_options, SQLALCHEMY_OPTION_TYPES)
         sa_options = {}
-        if "HEROKU_POSTGRESQL_JADE_URL_1" in os.environ:
+        
+        if "HEROKU_POSTGRESQL_JADE_URL" in os.environ:
             sys.stderr.write("--------------  DATABASE_URL ----------------\n")
             urlparse.uses_netloc.append("postgres")
-            db_url = urlparse.urlparse(os.environ["HEROKU_POSTGRESQL_JADE_URL"])
-            #db_url = str(os.environ["HEROKU_POSTGRESQL_JADE_URL"])
-        sys.stderr.write("FINAL >> " + str(db_url) + "\n")
+            db_url = os.environ.get('HEROKU_POSTGRESQL_JADE_URL')
+            
+        
+        sys.stderr.write("FINAL DB_URL >> " + str(db_url) + "\n")
+        
         
         engine = sqlalchemy.create_engine(db_url, **sa_options)
 
